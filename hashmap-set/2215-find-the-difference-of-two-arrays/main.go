@@ -44,14 +44,17 @@ func findDifference(nums1 []int, nums2 []int) [][]int {
 	}
 
 	r1 := make([]int, 0)
+	duplicated := make(map[int]struct{})
 	for k := range set1 {
 		if _, ok := set2[k]; !ok {
 			r1 = append(r1, k)
+		} else {
+			duplicated[k] = struct{}{}
 		}
 	}
 	r2 := make([]int, 0)
 	for k := range set2 {
-		if _, ok := set1[k]; !ok {
+		if _, ok := duplicated[k]; !ok {
 			r2 = append(r2, k)
 		}
 	}
